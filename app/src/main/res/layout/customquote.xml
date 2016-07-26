@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/quotemessage"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.67" />
+        android:layout_weight="0.05" />
+    </ScrollView>
+    <Button
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:text="Send your quote"
+        android:id="@+id/quotesend"
+        android:layout_gravity="center_horizontal"/>
+
+    <ImageButton
+        android:layout_width="141dp"
+        android:layout_height="117dp"
+        android:id="@+id/clicktocall"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/pic6" />
+
+</LinearLayout>

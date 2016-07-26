@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:layout_width="102dp"
+        android:layout_height="350dp"
+        android:id="@+id/lbutton"
+        android:layout_gravity="center_vertical"
+        android:layout_alignTop="@+id/lupload"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/lupload" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lno"
+        android:layout_weight="1"
+        android:text="lisence no" />
+
+    <Button
+        android:layout_width="37dp"
+        android:layout_height="wrap_content"
+        android:text="upload license"
+        android:id="@+id/lupload"
+        android:layout_gravity="bottom"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/lname"
+        android:layout_toEndOf="@+id/lname" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/lname"
+        android:layout_weight="1"
+        android:layout_below="@+id/lno"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="28dp"
+        android:layout_height="201dp"
+        android:text="Next"
+        android:id="@+id/lskip"
+        android:layout_gravity="bottom"
+        android:layout_below="@+id/lupload"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

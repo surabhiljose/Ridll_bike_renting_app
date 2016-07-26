@@ -19,7 +19,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -35,26 +34,11 @@ import java.io.OutputStream;
 
 
 
-public class Licensepick extends Activity {
+public  class ChangeLicense extends Activity {
 
     ImageButton b;
-    Button skip, upload ;
-    EditText lid, customername;
-
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        return  super.onKeyDown(keyCode,event);
-    }
-
+    Button upload ;
+    EditText lid;
 
     @Override
 
@@ -62,39 +46,16 @@ public class Licensepick extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.lisencepick);
+        setContentView(R.layout.changelicense);
 
         b=(ImageButton)findViewById(R.id.lbutton);
-        skip = (Button)findViewById(R.id.lskip);
+
         upload = (Button)findViewById(R.id.lupload);
         lid = (EditText)findViewById(R.id.lno);
-        customername = (EditText)findViewById(R.id.lname);
-        upload.setEnabled(false);
-        skip.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-
-            public void onClick(View v) {
-                String cName = String.valueOf(customername.getText());
-                if (cName == null)
-                {
-                    Toast.makeText(getApplicationContext(), "name is left unattended", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    //push the name and if successful; do the below
-                    Intent intent = new Intent(Licensepick.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
-
-                    //skiping to next activity
-
-                }
-            }
-
-        });
         SharedPreferences prefer = getApplicationContext().getSharedPreferences("MyPrefff", 0); // 0 - for private mode
-        String licenseimage =  prefer.getString("liscenceimage", "nul");
+        String licenseimage =  prefer.getString("previmage", "nul");
+        upload.setEnabled(false);
 
         if(licenseimage.equals("nul")) {
 
@@ -111,6 +72,10 @@ public class Licensepick extends Activity {
                         THUMBSIZE, THUMBSIZE);
 
                 b.setImageBitmap(ThumbImage);
+
+
+
+
             }catch(Exception e){
                 e.getMessage();
 
@@ -120,26 +85,26 @@ public class Licensepick extends Activity {
             public void onClick(View v)
             {
 
-                    ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                    if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)
-                    {
-                        //upoad all the image and stuffs using json
-                        SharedPreferences prefff = getApplicationContext().getSharedPreferences("MyPrefff", 0); // 0 - for private mode
-                        SharedPreferences.Editor editor = prefff.edit();
-                        String temppath =  prefff.getString("liscenceimage", "nul");
+                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)
+                {
+                    //upoad all the image and stuffs using json
+                    SharedPreferences prefff = getApplicationContext().getSharedPreferences("MyPrefff", 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = prefff.edit();
+                    String temppath =  prefff.getString("liscenceimage", "nul");
 
-                        editor.putString("previmage", temppath);
+                    editor.putString("previmage", temppath);
 
-                        editor.commit();
+                    editor.commit();
+                    Intent intent = new Intent(ChangeLicense.this, MyAccount.class);
+                    startActivity(intent);
+                    finish();
 
-                      //if(successful)
-                        Toast.makeText(getApplicationContext(), "license has beenn successfully uploaded", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "internet is not avialable", Toast.LENGTH_SHORT).show();
 
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), "internet is not avialable", Toast.LENGTH_SHORT).show();
-
-                    }
+                }
 
 
 
@@ -169,7 +134,7 @@ public class Licensepick extends Activity {
 
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Licensepick.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ChangeLicense.this);
 
         builder.setTitle("Upload your License");
 
@@ -261,16 +226,15 @@ public class Licensepick extends Activity {
                 try {
 
 
-
-
                     final int THUMBSIZE = 150;
                     final BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inSampleSize = 8;
 
-                    Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(f.getAbsolutePath(), options),
+                    Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(f.getAbsolutePath(),options),
                             THUMBSIZE, THUMBSIZE);
 
                     b.setImageBitmap(ThumbImage);
+
 
                     SharedPreferences prefff = getApplicationContext().getSharedPreferences("MyPrefff", 0); // 0 - for private mode
                     SharedPreferences.Editor editor = prefff.edit();
@@ -298,7 +262,7 @@ public class Licensepick extends Activity {
 
                         outFile = new FileOutputStream(file);
 
-                        ThumbImage.compress(Bitmap.CompressFormat.JPEG, 90, outFile);
+                        ThumbImage.compress(Bitmap.CompressFormat.JPEG,100, outFile);
 
                         outFile.flush();
 
@@ -342,12 +306,12 @@ public class Licensepick extends Activity {
 
                 c.close();
 
-
                 final int THUMBSIZE = 150;
+
                 final BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inSampleSize = 8;
 
-                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(picturePath, options),
+                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(picturePath,options),
                         THUMBSIZE, THUMBSIZE);
 
                 b.setImageBitmap(ThumbImage);

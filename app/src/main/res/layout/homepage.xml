@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/offers"
+            android:src="@drawable/myacc"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/myaccount"
+            android:src="@drawable/myacc"/>
+    </LinearLayout>
+
+    <SlidingDrawer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:content="@+id/linearLayout"
+        android:handle="@+id/button"
+        android:id="@+id/slidingDrawer"
+
+        android:layout_gravity="center_vertical">
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <CalendarView
+                android:layout_width="match_parent"
+                android:layout_height="194dp"
+                android:id="@+id/calendarView"
+                android:layout_gravity="center_horizontal" />
+
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="132dp"
+                android:id="@+id/timePicker"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View bikes"
+                android:id="@+id/viewbikes"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick a bike" />
+    </SlidingDrawer>
+
+
+
+</RelativeLayout>
